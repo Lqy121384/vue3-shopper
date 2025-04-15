@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景圆 -->
+  <circle cx="50" cy="50" r="48" fill="#4CAF50" opacity="0.1"/>
+  
+  <!-- 胡萝卜主题头像 -->
+  <g transform="translate(25, 20)">
+    <!-- 胡萝卜身体 -->
+    <path d="M25 10 L35 50 L15 50 Z" fill="#FF9800"/>
+    
+    <!-- 胡萝卜叶子 -->
+    <path d="M15 50 Q25 30, 35 50" fill="#4CAF50"/>
+    <path d="M15 50 Q20 40, 25 50" fill="#8BC34A"/>
+    <path d="M25 50 Q30 40, 35 50" fill="#8BC34A"/>
+    
+    <!-- 眼睛 -->
+    <circle cx="20" cy="25" r="2" fill="white"/>
+    <circle cx="30" cy="25" r="2" fill="white"/>
+    
+    <!-- 微笑 -->
+    <path d="M20 35 Q25 40, 30 35" stroke="white" stroke-width="1" fill="none"/>
+    
+    <!-- 胡萝卜纹理 -->
+    <path d="M20 20 L30 40" stroke="#FF5722" stroke-width="1" fill="none"/>
+    <path d="M25 15 L25 45" stroke="#FF5722" stroke-width="1" fill="none"/>
+  </g>
+</svg> 
