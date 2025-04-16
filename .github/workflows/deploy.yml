@@ -1,4 +1,4 @@
-name: Deploy to Server
+name: Auto Deploy to My Server
 
 on:
   push:
@@ -6,30 +6,25 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up SSH key
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-
-    - name: Add server to known_hosts
-      run: |
-        ssh-keyscan -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
-
-    - name: Deploy via SSH
-      run: |
-        ssh -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
-          cd /home/your-folder/vue3-shopper  # ✅ 改成你服务器上项目的目录
+    - name: Setup SSH connection
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        port: ${{ secrets.SERVER_PORT }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          cd /opt/vue3-shopper
           git pull origin main
-          npm install
-          npm run build-only
-          pm2 restart app || pm2 start npm --name "app" -- run start
-        EOF
+          /opt/node16/bin/npm install
+          /opt/node16/bin/npm run build-only
+          pm2 reload all || pm2 start dist/server.js --name vue-shop-api
+
 
