@@ -42,3 +42,4 @@ jobs:
           script: |
             sudo systemctl restart nginx
 
+
