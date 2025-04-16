@@ -1,16 +1,16 @@
-name: Build and Deploy to Server
+name: Deploy to Server
 
 on:
   push:
     branches:
-      - main
+      - main  # 推送 main 分支时触发
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -21,14 +21,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
+      - name: Build front-end
         run: npm run build-only
 
-      - name: Deploy via SCP
-        uses: appleboy/scp-action@v0.1.6
+      - name: Deploy to server via SSH
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "dist/*"
-          target: "/www/wwwroot/vue3-shopper"
+          target: "/www/vue3-shopper"  # 可以按你服务器上的路径改
