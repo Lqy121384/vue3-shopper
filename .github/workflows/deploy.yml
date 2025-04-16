@@ -3,14 +3,14 @@ name: Deploy to Aliyun
 on:
   push:
     branches:
-      - main  # ⚠️ 如果你主分支叫 master 就改成 master
+      - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Setup Node.js
@@ -24,11 +24,12 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Deploy via SCP
+    - name: Deploy via SSH
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
         username: root
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "dist/*"
-        target: "/www/wwwroot/dist"
+        target: "/www/wwwroot/"
+
