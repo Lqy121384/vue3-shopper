@@ -14,7 +14,13 @@ const port = 3002;
 
 // 启用 CORS
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174'],
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://8.137.121.139:5173',
+    'http://8.137.121.139:5174',
+    'http://8.137.121.139'
+  ],
   credentials: true
 }));
 
@@ -1951,8 +1957,8 @@ function parseProductRecommendations(response) {
 }
 
 // 启动服务器
-app.listen(port, () => {
-  console.log(`Mock server is running at http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Mock server is running on http://0.0.0.0:${port}`);
   console.log('Available API routes:');
   console.log('  GET /api/products');
   console.log('  GET /api/products/hot');

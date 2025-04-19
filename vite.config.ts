@@ -32,10 +32,11 @@ export default defineConfig({
     include: ['dayjs']
   },
   server: {
+    host: '0.0.0.0',
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:3002',
+        target: 'http://8.137.121.139:3002',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         configure: (proxy, options) => {
