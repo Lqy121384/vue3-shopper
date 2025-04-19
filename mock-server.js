@@ -14,14 +14,10 @@ const port = 3002;
 
 // 启用 CORS
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://8.137.121.139:5173',
-    'http://8.137.121.139:5174',
-    'http://8.137.121.139'
-  ],
-  credentials: true
+  origin: true,  // 允许所有来源
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'x-user-id']
 }));
 
 // 解析 JSON 请求体
