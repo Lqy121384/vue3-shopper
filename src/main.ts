@@ -8,8 +8,8 @@ import router from './router'
 import './styles/main.css'
 import axios from 'axios'
 
-// 设置 axios 默认配置
-axios.defaults.baseURL = 'http://localhost:3002'
+// ✅ 设置 axios 默认配置
+axios.defaults.baseURL = '/api'  // ← 关键修改点
 axios.defaults.timeout = 10000
 axios.defaults.headers.common['Content-Type'] = 'application/json'
 
@@ -25,3 +25,4 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('#app')
+
