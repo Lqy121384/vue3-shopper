@@ -5,7 +5,7 @@ import type { ApiResponse } from '@/types/api'
 
 // 创建axios实例
 const request: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+  baseURL: '', // ✅ 让你原来写的 /api/xxx 不被重复拼接
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json'
