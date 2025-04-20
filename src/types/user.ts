@@ -23,16 +23,12 @@ export interface User {
 export interface UserInfo {
   id: string
   username: string
-  nickname: string
-  avatar: string
-  email: string
-  phone: string
-  gender: 'male' | 'female' | 'other'
-  birthday: string
-  address: string
-  points: number
-  level: number
-  role: 'user' | 'admin'
+  nickname?: string
+  email?: string
+  phone?: string
+  avatar?: string
+  role: UserRole
+  status: UserStatus
   createdAt: string
   updatedAt: string
 }
@@ -45,7 +41,6 @@ export interface LoginRequest {
 export interface RegisterRequest {
   username: string
   password: string
-  nickname?: string
   email?: string
   phone?: string
 }
@@ -62,14 +57,10 @@ export interface RegisterResponse {
 }
 
 export interface UpdateProfileRequest {
-  username?: string
+  nickname?: string
   email?: string
   phone?: string
-  nickname?: string
   avatar?: string
-  gender?: 'male' | 'female' | 'other'
-  birthday?: string
-  address?: string
 }
 
 export interface ChangePasswordRequest {

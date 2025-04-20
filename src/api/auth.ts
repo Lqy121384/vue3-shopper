@@ -1,5 +1,6 @@
-import request from '@/utils/request'
-import type { ApiResponse, LoginResponse, RegisterResponse, UserInfoResponse, UpdateProfileRequest, ChangePasswordRequest } from '@/types/api'
+import request from './request'
+import type { LoginRequest, RegisterRequest, UpdateProfileRequest } from '@/types/user'
+import type { ApiResponse, LoginResponse, RegisterResponse, UserInfoResponse } from '@/types/api'
 
 export interface LoginParams {
   username: string
@@ -40,12 +41,20 @@ export interface ForgotPasswordParams {
   newPassword: string
 }
 
-export const login = (data: LoginParams) => {
-  return request.post<any, ApiResponse<LoginResponse>>('/api/auth/login', data)
+export const login = (data: LoginRequest): Promise<ApiResponse<LoginResponse>> => {
+  return request({
+    url: '/api/auth/login',
+    method: 'post',
+    data
+  })
 }
 
-export const register = (data: RegisterParams) => {
-  return request.post<any, ApiResponse<RegisterResponse>>('/api/auth/register', data)
+export const register = (data: RegisterRequest): Promise<ApiResponse<RegisterResponse>> => {
+  return request({
+    url: '/api/auth/register',
+    method: 'post',
+    data
+  })
 }
 
 export const sendSmsCode = (phone: string) => {
@@ -56,18 +65,32 @@ export const forgotPassword = (data: ForgotPasswordParams) => {
   return request.post<any, ApiResponse<null>>('/api/auth/forgot-password', data)
 }
 
-export const logout = () => {
-  return request.post<any, ApiResponse<null>>('/api/auth/logout')
+export const logout = (): Promise<ApiResponse<null>> => {
+  return request({
+    url: '/api/auth/logout',
+    method: 'post'
+  })
 }
 
-export const getUserInfo = () => {
-  return request.get<any, ApiResponse<UserInfoResponse>>('/api/auth/user')
+export const getUserInfo = (): Promise<ApiResponse<UserInfoResponse>> => {
+  return request({
+    url: '/api/auth/user',
+    method: 'get'
+  })
 }
 
-export const updateUserInfo = (data: UpdateProfileRequest) => {
-  return request.put<any, ApiResponse<UserInfoResponse>>('/api/auth/user-info', data)
+export const updateUserInfo = (data: UpdateProfileRequest): Promise<ApiResponse<UserInfoResponse>> => {
+  return request({
+    url: '/api/user/info',
+    method: 'put',
+    data
+  })
 }
 
-export const updatePassword = (data: ChangePasswordRequest) => {
-  return request.put<any, ApiResponse<null>>('/api/auth/password', data)
+export const updatePassword = (data: { oldPassword: string; newPassword: string }): Promise<ApiResponse<null>> => {
+  return request({
+    url: '/api/user/password',
+    method: 'put',
+    data
+  })
 } 

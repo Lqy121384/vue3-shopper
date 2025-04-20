@@ -1,3 +1,5 @@
+import type { UserInfo } from './user'
+
 // API响应状态码
 export enum ApiCode {
   SUCCESS = 0,
@@ -76,52 +78,32 @@ export interface ApiInstanceConfig {
   responseInterceptors?: ApiResponseInterceptor[]
 }
 
+// 登录响应
 export interface LoginResponse {
-  code: number
-  message: string
-  data: {
-    token: string
-    userInfo: {
-      id: string
-      username: string
-      nickname: string
-      avatar: string
-      email: string
-      phone: string
-      gender: 'male' | 'female' | 'other'
-      birthday: string
-      address: string
-      points: number
-      level: number
-      role: 'user' | 'admin'
-      createdAt: string
-      updatedAt: string
-    }
-  }
+  token: string
+  userInfo: UserInfo
 }
 
+// 注册响应
 export interface RegisterResponse {
-  code: number
-  message: string
-  data: {
-    token: string
-    userInfo: {
-      id: string
-      username: string
-      nickname: string
-      avatar: string
-      email: string
-      phone: string
-      gender: 'male' | 'female' | 'other'
-      birthday: string
-      address: string
-      points: number
-      level: number
-      role: 'user' | 'admin'
-      createdAt: string
-      updatedAt: string
-    }
-  }
+  token: string
+  userInfo: UserInfo
+}
+
+// 用户信息响应
+export interface UserInfoResponse {
+  userInfo: UserInfo
+}
+
+// 订单统计响应
+export interface OrderStatsResponse {
+  total: number
+  pending: number
+  processing: number
+  shipped: number
+  delivered: number
+  cancelled: number
+  refunded: number
 }
 
 export interface ErrorResponse {
@@ -147,43 +129,6 @@ export interface ListResponse<T> {
   total: number;
   page: number;
   pageSize: number;
-}
-
-export interface OrderStatsResponse {
-  code: number
-  message: string
-  data: {
-    total: number
-    pending: number
-    processing: number
-    shipped: number
-    delivered: number
-    cancelled: number
-    refunded: number
-  }
-}
-
-export interface UserInfoResponse {
-  code: number
-  message: string
-  data: {
-    userInfo: {
-      id: string
-      username: string
-      nickname: string
-      avatar: string
-      email: string
-      phone: string
-      gender: 'male' | 'female' | 'other'
-      birthday: string
-      address: string
-      points: number
-      level: number
-      role: 'user' | 'admin'
-      createdAt: string
-      updatedAt: string
-    }
-  }
 }
 
 export interface UpdateProfileRequest {
