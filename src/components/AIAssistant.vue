@@ -156,7 +156,7 @@ const getAIResponse = async (message: string): Promise<string> => {
 
     console.log('发送请求:', { message, history })
 
-    const response = await axios.post<ApiResponse<{ message: string }>>('http://localhost:3002/api/chat', {
+    const response = await axios.post<ApiResponse<{ message: string }>>('/api/chat', {
       message,
       history
     }, {
